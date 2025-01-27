@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Gaussian Splat Viewer - Garden</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+  </style>
+  <script type="importmap">
+    {
+        "imports": {
+            "three": "./lib/three.module.js",
+            "gaussian-splats-3d": "./lib/gaussian-splats-3d.module.js"
+        }
+    }
+  </script>
+</head>
+
+<body>
+  <script type="module">
+    import * as GaussianSplats3D from 'gaussian-splats-3d';
+    import * as THREE from 'three';
+
+    async function loadGardenScene() {
+      const viewerOptions = {
+        cameraUp: [0, -1, 0],
+        initialCameraPosition: [	-0.27494, -4.75250, -1.26029],
+        initialCameraLookAt: [1.07537, -4.36389, 1.10615],
+        antialiased: false,
+        splatRenderMode: GaussianSplats3D.SplatRenderMode.ThreeD,
+        sphericalHarmonicsDegree: 3
+      };
+
+      const response = await fetch('./assets/scenes/ella.ksplat');
+      const fileBuffer = await response.arrayBuffer();
+
+      const splatBuffer = await GaussianSplats3D.KSplatLoader.loadFromFileData(fileBuffer);
+
+      const viewer = new GaussianSplats3D.Viewer(viewerOptions);
+      viewer.addSplatBuffers([splatBuffer]);
+      viewer.start();
+    }
+
+    loadGardenScene().catch(error => {
+      console.error('Failed to load the Ella scene:', error);
+    });
+  </script>
+</body>
+
+</html>
