@@ -23,7 +23,8 @@
         "fix-styling": "npx stylelint **/*.scss --fix",
         "fix-js": "npx eslint src --fix",
         "lint": "npx eslint 'src/**/*.js' || true",
-        "prettify": "npx prettier --write 'src/**/*.js'"
+        "prettify": "npx prettier --write 'src/**/*.js'",
+        "dev": "concurrently --kill-others \"npm run build-demo-windows\" \"npm run demo\""
     },
     "watch": {
         "build-library": {
@@ -53,9 +54,10 @@
         "@babel/eslint-parser": "7.22.11",
         "@babel/plugin-proposal-class-properties": "7.18.6",
         "@babel/preset-env": "7.22.10",
-        "babel-loader": "9.1.3",
         "@rollup/plugin-terser": "0.4.4",
         "@rollup/pluginutils": "5.0.5",
+        "babel-loader": "9.1.3",
+        "concurrently": "^8.2.0",
         "eslint": "8.47.0",
         "eslint-config-google": "0.14.0",
         "file-loader": "6.2.0",
@@ -63,7 +65,7 @@
         "npm-watch": "0.11.0",
         "prettier": "3.0.2",
         "prettier-eslint": "15.0.1",
-        "rollup": "3.28.1",
+        "rollup": "^3.29.5",
         "url-loader": "4.1.1"
     },
     "peerDependencies": {
