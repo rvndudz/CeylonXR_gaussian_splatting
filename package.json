@@ -76,5 +76,10 @@
         "build/gaussian-splats-3d.umd.cjs.map",
         "build/gaussian-splats-3d.module.js",
         "build/gaussian-splats-3d.module.js.map"
-    ]
+    ],
+    "dependencies": {
+        "@aws-sdk/client-s3": "^3.735.0",
+        "dotenv": "^16.4.7",
+        "multer": "^1.4.5-lts.1"
+    }
 }
