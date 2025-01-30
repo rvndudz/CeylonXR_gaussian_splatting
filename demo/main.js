@@ -13,9 +13,21 @@ async function loadGardenScene() {
 
   const s3Url = "https://ceylonxr.s3.eu-north-1.amazonaws.com/ella.ksplat";
 
+  // Detect if we're on localhost (or 127.0.0.1).
+  const hostname = window.location.hostname;
+  const isLocalhost = (hostname === 'localhost' || hostname === '127.0.0.1');
+
   try {
-    // Fetch file and get response headers for size
-    const response = await fetch(s3Url);
+    // Fetch the splat file 
+    
+    // Choose the appropriate file URL depending on environment
+    let response;
+    if (isLocalhost) {
+      response = await fetch('./assets/scenes/ella.ksplat');
+    } else {
+      response = await fetch(s3Url);
+    }
+
     if (!response.ok) throw new Error(`Failed to fetch: ${response.statusText}`);
 
     const contentLength = response.headers.get("Content-Length");
