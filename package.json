@@ -24,7 +24,7 @@
         "fix-js": "npx eslint src --fix",
         "lint": "npx eslint 'src/**/*.js' || true",
         "prettify": "npx prettier --write 'src/**/*.js'",
-        "dev": "concurrently --kill-others \"npm run build-demo-windows\" \"npm run demo\""
+        "dev": "npm run build-windows && npm run demo"
     },
     "watch": {
         "build-library": {
